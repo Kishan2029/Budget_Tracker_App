@@ -1,13 +1,18 @@
-import { createContext,useReducer } from "react"
+import React,{ createContext,useReducer } from "react"
 
 const AppReducer =(state, action) =>{
     switch(action.type){
+        case 'ADD_EXPENSE':
+            return{
+                ...state,
+                expenses:[...state.expenses,action.payload]
+            }
         default:
             return state;
     }
 }
 const initialState={
-    budjet:2000,
+    budget:2000,
     expenses:[
         { id: 12, name: 'shopping', cost: 40 },
 		{ id: 13, name: 'holiday', cost: 400 },
@@ -27,7 +32,7 @@ export const AppProvider = (props) =>{
 				dispatch,
             }}
         >
-            {props.childeren}
+            {props.children}
         </AppContext.Provider>
     )
 }
